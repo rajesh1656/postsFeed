@@ -1,0 +1,59 @@
+.App {
+  text-align: center;
+}
+
+nav ul {
+  list-style: none;
+}
+
+nav ul li {
+  display: inline-block;
+  padding: 10px;
+}
+
+.post-feed {
+    justify-content: center;
+    float: left;
+    margin: 0;
+    margin-left: 0px !important;
+    width: 100%;
+}
+.post-feed-pane {
+    border-radius: 16px;
+    display: inline-block;
+    background-color: #383446;
+    background: #101010;
+    box-shadow: 0 2px 12px rgb(0 0 0 / 17%);
+    flex-direction: column;
+    position: relative;
+    margin: 0 0 25px;
+    width: 100%;
+    padding: 10px;
+    color: #e2e2e2;
+}
+
+.posts-top-pane{
+  max-width: 800px;
+  margin: 0 auto;
+}
+.post-title {
+  font-size: 28px;
+  line-height: 42px;
+  font-weight: 700;
+  padding: 0;
+  color: #e2e2e2;
+  text-shadow: 0 2px 4px rgb(0 0 0 / 36%);
+}
+.post-desc{
+  width: 100%;
+  position: relative;
+  margin-bottom: 16px;
+  color: #e2e2e2;
+}
+.link{
+  color: #e2e2e2;
+  cursor: pointer !important;
+}
+form input, form textarea{
+  width: 100%;
+}
