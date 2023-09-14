@@ -10,18 +10,18 @@ export default function ListPost() {
 
     const [inputs, setInputs] = useState([]);
 
-    const {id} = useParams();
+    const { id } = useParams();
 
     useEffect(() => {
         getPost();
     }, []);
 
     function getPost() {
-        axios.get(`${commonFns.apiUrl}posts/${id}`,{
-            headers:{
-                [commonFns.apiHeaderKey] : commonFns.apiHeaderValue
+        axios.get(`${commonFns.apiUrl}posts/${id}`, {
+            headers: {
+                [commonFns.apiHeaderKey]: commonFns.apiHeaderValue
             }
-        }).then(function(response) {
+        }).then(function (response) {
             // console.log(response.data);
             setInputs(response.data);
         });
@@ -30,64 +30,67 @@ export default function ListPost() {
     const handleChange = (event) => {
         const name = event.target.name;
         const value = event.target.value;
-        setInputs(values => ({...values, [name]: value}));
+        setInputs(values => ({ ...values, [name]: value }));
     }
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        axios.put(`${commonFns.apiUrl}posts/${id}/edit`, inputs,{
-            headers:{
-                [commonFns.apiHeaderKey] : commonFns.apiHeaderValue
+        axios.put(`${commonFns.apiUrl}posts/${id}/edit`, inputs, {
+            headers: {
+                [commonFns.apiHeaderKey]: commonFns.apiHeaderValue
             }
-        }).then(function(response){
-            console.log(response.data);
-            if(response.data && response.data){    
-                if(response.data.status){
+        }).then(function (response) {
+            // console.log(response.data);
+            if (response.data && response.data) {
+                if (response.data.status) {
                     toast.success(response.data.message);
-                }else{
+                } else {
                     toast.error(response.data.message);
                 }
             }
-            navigate('/');
+            setTimeout(() => {
+                navigate('/')
+            }, 1000);
         });
-        
+
     }
     return (
         <div className="posts-top-pane">
             <h1>Edit post</h1>
             <div className="post-feed-pane">
-                    <div className=" post-feed">
-            
-            <form onSubmit={handleSubmit}>
-                <table cellSpacing="10" width="90%">
-                    <tbody>
-                        <tr>
-                            <th width="30%">
-                                <label>Title: </label>
-                            </th>
-                            <td width="70%">
-                                <input value={inputs.title} type="text" name="title" onChange={handleChange} />
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
-                                <label>Description: </label>
-                            </th>
-                            <td> 
-                                <textarea value={inputs.description} type="text" name="description" onChange={handleChange} />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td align ="left">
-                                <button>Save</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </form>
+                <div className=" post-feed">
+
+                    <form onSubmit={handleSubmit}>
+                        <table cellSpacing="10" width="90%">
+                            <tbody>
+                                <tr>
+                                    <th width="30%">
+                                        <label>Title: </label>
+                                    </th>
+                                    <td width="70%">
+                                        <input value={inputs.title} type="text" name="title" onChange={handleChange} />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        <label>Description: </label>
+                                    </th>
+                                    <td>
+                                        <textarea value={inputs.description} type="text" name="description" onChange={handleChange} />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td align="left">
+                                        <button>Save</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
             </div>
-            </div>
+            <ToastContainer />
         </div>
     )
 }
